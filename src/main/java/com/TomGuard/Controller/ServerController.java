@@ -24,9 +24,9 @@ public class ServerController {
         return serverService.findAllServers();
     }
 
-    @GetMapping("/{id}")
-    public Optional<ServerEntity> findById(@PathVariable("id")Long id){
-        return serverService.findById(id);
+    @GetMapping("/{hostName}")
+    public Optional<ServerEntity> findById(@PathVariable("hostName")String hostName){
+        return serverService.findById(hostName);
     }
 
     @PostMapping("/add")
@@ -40,9 +40,9 @@ public class ServerController {
     }
 
 
-    @DeleteMapping("/{id}")
-    public void deleteServer(@PathVariable("id") Long id)
+    @DeleteMapping("/{hostName}")
+    public void deleteServer(@PathVariable("hostName") String hostName)
     {
-        serverService.deleteServer(id);
+        serverService.deleteServer(hostName);
     }
 }
