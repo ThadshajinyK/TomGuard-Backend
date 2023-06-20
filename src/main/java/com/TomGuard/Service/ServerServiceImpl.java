@@ -26,13 +26,12 @@ public class ServerServiceImpl implements ServerService{
     }
 
     @Override
-    public Optional<ServerEntity> findById(Long id) {
-        return serverRepo.findById(id);
+    public Optional<ServerEntity> findById(String hostName) {
+        return serverRepo.findById(hostName);
     }
 
     @Override
     public ServerEntity saveServer(ServerEntity server) {
-        server.setTimestamp(Timestamp.valueOf(LocalDateTime.now()));
         return serverRepo.save(server);
     }
 
@@ -42,8 +41,8 @@ public class ServerServiceImpl implements ServerService{
     }
 
     @Override
-    public void deleteServer(Long id) {
-        serverRepo.deleteById(id);
+    public void deleteServer(String hostName) {
+        serverRepo.deleteById(hostName);
        // updateIdsAfterDeletion();
     }
 

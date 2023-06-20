@@ -8,10 +8,6 @@ import java.sql.Timestamp;
 @Table(name="logs")
 public class LogsEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long logsId;
-
-    @Column(nullable = true)
     private String timestamp;
     @Column(nullable = true)
     private String logLevel;
@@ -29,8 +25,7 @@ public class LogsEntity {
 
     }
 
-    public LogsEntity(Long logsId,String timestamp, String logLevel, String loggerName, String threadName, String message) {
-        this.logsId = logsId;
+    public LogsEntity(String timestamp, String logLevel, String loggerName, String threadName, String message) {
         this.timestamp=timestamp;
         this.logLevel = logLevel;
         this.loggerName = loggerName;
@@ -45,14 +40,6 @@ public class LogsEntity {
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
-    public Long getLogsId() {
-        return logsId;
-    }
-
-    public void setLogsId(Long logsId) {
-        logsId = logsId;
-    }
-
 
     public String getLogLevel() {
         return logLevel;

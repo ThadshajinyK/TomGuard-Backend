@@ -9,9 +9,10 @@ import java.util.Optional;
 public interface ServerService {
 
     List<ServerEntity> findAllServers();
-    Optional<ServerEntity> findById(Long id);
+    Optional<ServerEntity> findById(String hostName);
+
     ServerEntity saveServer(ServerEntity server);
     ServerEntity updateServer(ServerEntity server);
-    void deleteServer(Long id);
+    void deleteServer(String hostName);
 
 }

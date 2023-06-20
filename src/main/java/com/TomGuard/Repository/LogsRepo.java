@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.sql.Timestamp;
 
 @Repository
-public interface LogsRepo extends JpaRepository<LogsEntity, Long> {
+public interface LogsRepo extends JpaRepository<LogsEntity, String > {
 }
