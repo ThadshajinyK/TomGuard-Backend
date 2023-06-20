@@ -13,14 +13,37 @@ public class ApplicationEntity {
     @Column(nullable = true)
     private String path;
 
+    @Column(nullable = true)
+    private String appType;
+
+    @Column(nullable = true)
+    private String clientName;
 
     public ApplicationEntity() {
     }
 
-    public ApplicationEntity(String applicationName, String state, String path) {
+    public ApplicationEntity(String applicationName, String state, String path,String appType, String clientName) {
         this.applicationName = applicationName;
         this.state = state;
         this.path = path;
+        this.appType=appType;
+        this.clientName= clientName;
+    }
+
+    public String getAppType() {
+        return appType;
+    }
+
+    public void setAppType(String appType) {
+        this.appType = appType;
+    }
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
     }
 
     public String getApplicationName() {

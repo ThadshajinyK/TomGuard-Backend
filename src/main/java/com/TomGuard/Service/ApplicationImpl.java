@@ -28,7 +28,15 @@ public class ApplicationImpl implements ApplicationService{
 
     @Override
     public ApplicationEntity saveApp(ApplicationEntity applicationEntity) {
-        return applicationRepo.save(applicationEntity);
+        Optional<ApplicationEntity> existingApp = applicationRepo.findById(applicationEntity.getApplicationName());
+        if(existingApp.isPresent()){
+            ApplicationEntity updatedApp = existingApp.get();
+            updatedApp.setPath(applicationEntity.getPath());
+            updatedApp.setState(applicationEntity.getState());
+            return applicationRepo.save(updatedApp);
+        }else{
+            return applicationRepo.save(applicationEntity);
+        }
     }
 
     @Override

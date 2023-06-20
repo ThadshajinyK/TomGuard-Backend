@@ -38,8 +38,8 @@ public class ServerController {
     }
 
     @PostMapping("/add")
-    public ServerEntity saveServer(@RequestBody ServerEntity serverEntity){
-        return serverService.saveServer(serverEntity);
+    public void saveServer(@RequestBody ServerEntity serverEntity){
+         serverService.saveServer(serverEntity);
     }
 
     @PutMapping("/update")

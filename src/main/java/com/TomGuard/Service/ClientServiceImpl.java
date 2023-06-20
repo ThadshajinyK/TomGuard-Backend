@@ -34,8 +34,23 @@ public class ClientServiceImpl implements ClientService{
     }
 
     @Override
-    public ClientEntity updateClient(ClientEntity clientEntity) {
-        return clientRepo.save(clientEntity);
+    public void updateClient(ClientEntity clientEntity) {
+        Optional<ClientEntity> existingClient = clientRepo.findById(clientEntity.getId());
+        if(existingClient.isPresent())
+        {
+            ClientEntity updatedClient = existingClient.get();
+            updatedClient.setCompanyName(clientEntity.getCompanyName());
+            updatedClient.setBusinessType(clientEntity.getBusinessType());
+            updatedClient.setContactPerson(clientEntity.getContactPerson());
+            updatedClient.setExpectedFeatures(clientEntity.getExpectedFeatures());
+            updatedClient.setProjectScope(clientEntity.getProjectScope());
+            updatedClient.setProjectName(clientEntity.getProjectName());
+            updatedClient.setEmailAddress(clientEntity.getEmailAddress());
+            updatedClient.setPhoneNumber(clientEntity.getPhoneNumber());
+            updatedClient.setTargetAudience(clientEntity.getTargetAudience());
+            updatedClient.setProjectType(clientEntity.getProjectType());
+
+        }
     }
 
     @Override

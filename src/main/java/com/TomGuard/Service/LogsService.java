@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface LogsService {
     List<LogsEntity> findAllLogs();
     Optional<LogsEntity> findById(String timestamp);
-    LogsEntity saveLog(LogsEntity logsEntity);
+    void saveLog(LogsEntity logsEntity);
     LogsEntity updateLog(LogsEntity logsEntity);
     void deleteLog(String timestamp);
 
