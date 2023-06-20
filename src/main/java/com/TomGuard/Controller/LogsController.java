@@ -29,13 +29,13 @@ public class LogsController {
     }
 
     @PostMapping("/add")
-    public LogsEntity saveLogs(@RequestBody LogsEntity logsEntity){
-        return logsService.saveLog(logsEntity);
+    public void saveLogs(@RequestBody LogsEntity logsEntity){
+         logsService.saveLog(logsEntity);
     }
 
     @PutMapping("/update")
-    public LogsEntity updateLogs(@RequestBody LogsEntity logsEntity){
-        return logsService.saveLog(logsEntity);
+    public void updateLogs(@RequestBody LogsEntity logsEntity){
+         logsService.saveLog(logsEntity);
     }
 
     @DeleteMapping("{timestamp}")

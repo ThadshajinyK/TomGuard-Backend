@@ -16,6 +16,7 @@ public class ApplicationController {
 
     public ApplicationController(ApplicationService applicationService) {
         this.applicationService = applicationService;
+
     }
 
 

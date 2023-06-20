@@ -6,8 +6,6 @@ import com.TomGuard.Repository.ServerRepo;
 import org.springframework.stereotype.Service;
 
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,8 +29,22 @@ public class ServerServiceImpl implements ServerService{
     }
 
     @Override
-    public ServerEntity saveServer(ServerEntity server) {
-        return serverRepo.save(server);
+    public void saveServer(ServerEntity server) {
+        Optional<ServerEntity> existingServer=serverRepo.findById(server.getHostName());
+        if(existingServer.isPresent())
+        {
+            ServerEntity updatedServer = existingServer.get();
+            updatedServer.setAvailability(server.getAvailability());
+            updatedServer.setIpAddress(server.getIpAddress());
+            updatedServer.setJvmVersion(server.getJvmVersion());
+            updatedServer.setOsArchitecture(server.getOsArchitecture());
+            updatedServer.setUptime(server.getUptime());
+            updatedServer.setOsName(server.getOsName());
+            updatedServer.setOsVersion(server.getOsVersion());
+        }else{
+            serverRepo.save(server);
+        }
+
     }
 
     @Override

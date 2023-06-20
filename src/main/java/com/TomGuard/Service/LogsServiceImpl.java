@@ -30,8 +30,15 @@ public class LogsServiceImpl implements LogsService {
     }
 
     @Override
-    public LogsEntity saveLog(LogsEntity logsEntity) {
-        return logsRepo.save(logsEntity);
+    public void saveLog(LogsEntity logsEntity) {
+        Optional<LogsEntity> existingLog=logsRepo.findById(logsEntity.getTimestamp());
+        if(existingLog.isPresent()){
+            LogsEntity updatedLog= existingLog.get();
+            if(logsEntity.getMessage()!=updatedLog.getMessage()){
+                logsRepo.save(logsEntity);
+            }
+             //do nothing: do not save or update
+        }
     }
 
     @Override
