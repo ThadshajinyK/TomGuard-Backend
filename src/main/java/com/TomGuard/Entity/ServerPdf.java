@@ -28,11 +28,11 @@ public class ServerPdf {
 
         // Creating font
         // Setting font style and size
-        Font fontTiltle = FontFactory.getFont(FontFactory.TIMES_ROMAN);
-        fontTiltle.setSize(20);
+        Font fontTitle = FontFactory.getFont(FontFactory.TIMES_ROMAN);
+        fontTitle.setSize(20);
 
         // Creating paragraph
-        Paragraph paragraph = new Paragraph("List Of Servers", fontTiltle);
+        Paragraph paragraph = new Paragraph("List Of Servers", fontTitle);
 
         // Aligning the paragraph in document
         paragraph.setAlignment(Paragraph.ALIGN_CENTER);
@@ -41,13 +41,13 @@ public class ServerPdf {
         document.add(paragraph);
 
         // Creating a table of 10 columns
-        PdfPTable table = new PdfPTable(10);
+        PdfPTable table = new PdfPTable(8);
 
 
 
         // Setting width of table, its columns and spacing
-        table.setWidthPercentage(100f/10);
-        table.setWidths(new int[] {1,1,1,1,1,1,1,1,1,1});
+        table.setWidthPercentage(100f);
+        table.setWidths(new int[] {1,1,1,1,1,1,1,1});
         table.setSpacingBefore(5);
 
         // Create Table Cells for table header
@@ -64,10 +64,8 @@ public class ServerPdf {
 
         // Adding headings in the created table cell/ header
         // Adding Cell to table
-        cell.setPhrase(new Phrase("Timestamp", font));
-        table.addCell(cell);
-        cell.setPhrase(new Phrase("Server Id", font));
-        table.addCell(cell);
+
+
         cell.setPhrase(new Phrase("Hostname", font));
         table.addCell(cell);
         cell.setPhrase(new Phrase("Ip Address", font));
@@ -88,9 +86,9 @@ public class ServerPdf {
         // Iterating over the list of servers
         for (ServerEntity serverEntity : serverEntityList) {
             // Adding server time stamp
-            table.addCell(String.valueOf(serverEntity.getTimestamp()));
+            //table.addCell(String.valueOf(serverEntity.getTimestamp()));
             // Adding server id
-            table.addCell(String.valueOf(serverEntity.getId()));
+           // table.addCell(String.valueOf(serverEntity.getId()));
             // Adding server hostname
             table.addCell(serverEntity.getHostName());
             table.addCell(serverEntity.getIpAddress());
@@ -100,6 +98,8 @@ public class ServerPdf {
             table.addCell(serverEntity.getOsVersion());
             table.addCell(serverEntity.getOsArchitecture());
             table.addCell(serverEntity.getJvmVersion());
+
+
         }
         // Adding the created table to document
         document.add(table);
