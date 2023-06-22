@@ -6,8 +6,6 @@ import com.TomGuard.Repository.ServerRepo;
 import org.springframework.stereotype.Service;
 
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,14 +24,28 @@ public class ServerServiceImpl implements ServerService{
     }
 
     @Override
-    public Optional<ServerEntity> findById(Long id) {
-        return serverRepo.findById(id);
+    public Optional<ServerEntity> findById(String hostName) {
+        return serverRepo.findById(hostName);
     }
 
     @Override
-    public ServerEntity saveServer(ServerEntity server) {
-        server.setTimestamp(Timestamp.valueOf(LocalDateTime.now()));
-        return serverRepo.save(server);
+    public void saveServer(ServerEntity server) {
+        Optional<ServerEntity> existingServer=serverRepo.findById(server.getHostName());
+        if(existingServer.isPresent())
+        {
+            ServerEntity updatedServer = existingServer.get();
+            updatedServer.setAvailability(server.getAvailability());
+            updatedServer.setIpAddress(server.getIpAddress());
+            updatedServer.setJvmVersion(server.getJvmVersion());
+            updatedServer.setOsArchitecture(server.getOsArchitecture());
+            updatedServer.setUptime(server.getUptime());
+            updatedServer.setOsName(server.getOsName());
+            updatedServer.setOsVersion(server.getOsVersion());
+            serverRepo.save(updatedServer);
+        }else{
+            serverRepo.save(server);
+        }
+
     }
 
     @Override
@@ -42,8 +54,8 @@ public class ServerServiceImpl implements ServerService{
     }
 
     @Override
-    public void deleteServer(Long id) {
-        serverRepo.deleteById(id);
+    public void deleteServer(String hostName) {
+        serverRepo.deleteById(hostName);
        // updateIdsAfterDeletion();
     }
 

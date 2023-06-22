@@ -11,6 +11,6 @@ public interface ClientService {
     List<ClientEntity> findAllClient();
     Optional<ClientEntity> findById(Long id);
     ClientEntity saveClient(ClientEntity clientEntity);
-    ClientEntity updateClient(ClientEntity clientEntity);
+    void updateClient(ClientEntity clientEntity);
     void deleteById(Long id);
 }

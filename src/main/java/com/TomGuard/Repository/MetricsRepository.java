@@ -1,14 +1,8 @@
 package com.TomGuard.Repository;
-
-import com.TomGuard.Entity.ServerEntity;
+import com.TomGuard.Entity.MetricsEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-
 @Repository
-public interface ServerRepo extends JpaRepository<ServerEntity, String> {
-
-
+public interface MetricsRepository extends JpaRepository<MetricsEntity,Long> {
 }

@@ -25,13 +25,21 @@ public class LogsServiceImpl implements LogsService {
     }
 
     @Override
-    public Optional<LogsEntity> findById(Long logsId) {
-        return logsRepo.findById(logsId);
+    public Optional<LogsEntity> findById(String timestamp) {
+        return logsRepo.findById(timestamp);
     }
 
     @Override
-    public LogsEntity saveLog(LogsEntity logsEntity) {
-        return logsRepo.save(logsEntity);
+    public void saveLog(LogsEntity logsEntity) {
+        Optional<LogsEntity> existingLog=logsRepo.findById(logsEntity.getTimestamp());
+        if(existingLog.isPresent()){
+            LogsEntity updatedLog= existingLog.get();
+            if(logsEntity.getMessage()==updatedLog.getMessage()){
+                logsRepo.save(updatedLog);
+            }
+             //do nothing: do not save or update
+        }
+        logsRepo.save(logsEntity);
     }
 
     @Override
@@ -40,7 +48,7 @@ public class LogsServiceImpl implements LogsService {
     }
 
     @Override
-    public void deleteLog(Long logsId) {
-        logsRepo.deleteById(logsId);
+    public void deleteLog(String timestamp) {
+        logsRepo.deleteById(timestamp);
     }
 }

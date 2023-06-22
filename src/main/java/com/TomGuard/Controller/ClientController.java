@@ -36,8 +36,8 @@ public class ClientController {
     }
 
     @PutMapping("/update")
-    public ClientEntity updateClient(@RequestBody ClientEntity clientEntity){
-        return clientService.updateClient(clientEntity);
+    public void updateClient(@RequestBody ClientEntity clientEntity){
+         clientService.updateClient(clientEntity);
     }
 
     @DeleteMapping("/{id}")

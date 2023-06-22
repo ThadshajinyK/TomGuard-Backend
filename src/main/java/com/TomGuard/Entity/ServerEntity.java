@@ -2,19 +2,11 @@ package com.TomGuard.Entity;
 
 import jakarta.persistence.*;
 
-import java.sql.Timestamp;
-
 @Entity
 @Table(name="server")
 public class ServerEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    @Column(nullable = false)
-    private Timestamp timestamp;
-    @Column(nullable = true)
     private String hostName;
 
     @Column(nullable = true)
@@ -39,11 +31,11 @@ public class ServerEntity {
     private String jvmVersion;
 
     public ServerEntity() {
-        this.timestamp = new Timestamp(System.currentTimeMillis());
+
     }
 
-    public ServerEntity(Long id,String hostName, String ipAddress, Long uptime, String availability, String osName, String osVersion, String osArchitecture, String jvmVersion) {
-        this.id = id;
+    public ServerEntity(String hostName, String ipAddress, Long uptime, String availability, String osName, String osVersion, String osArchitecture, String jvmVersion) {
+
         this.hostName = hostName;
         this.ipAddress = ipAddress;
         this.uptime = uptime;
@@ -52,22 +44,6 @@ public class ServerEntity {
         this.osVersion = osVersion;
         this.osArchitecture = osArchitecture;
         this.jvmVersion = jvmVersion;
-    }
-
-    public Timestamp getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getHostName() {
