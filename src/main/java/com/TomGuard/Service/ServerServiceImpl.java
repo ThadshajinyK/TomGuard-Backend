@@ -41,6 +41,7 @@ public class ServerServiceImpl implements ServerService{
             updatedServer.setUptime(server.getUptime());
             updatedServer.setOsName(server.getOsName());
             updatedServer.setOsVersion(server.getOsVersion());
+            serverRepo.save(updatedServer);
         }else{
             serverRepo.save(server);
         }

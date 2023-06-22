@@ -32,6 +32,8 @@ public class ApplicationImpl implements ApplicationService{
         if(existingApp.isPresent()){
             ApplicationEntity updatedApp = existingApp.get();
             updatedApp.setPath(applicationEntity.getPath());
+            updatedApp.setAppType(applicationEntity.getAppType());
+            updatedApp.setClientName(applicationEntity.getClientName());
             updatedApp.setState(applicationEntity.getState());
             return applicationRepo.save(updatedApp);
         }else{
