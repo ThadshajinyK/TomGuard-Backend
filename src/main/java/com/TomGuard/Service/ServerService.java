@@ -14,4 +14,5 @@ public interface ServerService {
     ServerEntity updateServer(ServerEntity server);
     void deleteServer(String hostName);
 
+    Long serverCount();
 }

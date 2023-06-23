@@ -6,6 +6,10 @@ import com.TomGuard.Entity.ServerEntity;
 import com.TomGuard.Entity.ServerPdf;
 import com.TomGuard.Service.ApplicationService;
 import com.lowagie.text.DocumentException;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.PersistenceUnit;
+import jakarta.persistence.Query;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -75,5 +79,19 @@ public class ApplicationController {
 
 
 
+    }
+
+    @PersistenceUnit
+    private EntityManagerFactory emfy;
+
+    @GetMapping("/appcount")
+    public long getServerCount() {
+        EntityManager em = emfy.createEntityManager();
+        try {
+            Query query = em.createQuery("SELECT COUNT(a) FROM ApplicationEntity a");
+            return (long) query.getSingleResult();
+        } finally {
+            em.close();
+        }
     }
 }
