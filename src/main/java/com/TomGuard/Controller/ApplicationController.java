@@ -1,10 +1,19 @@
 package com.TomGuard.Controller;
 
 import com.TomGuard.Entity.ApplicationEntity;
+import com.TomGuard.Entity.Apppdf;
+import com.TomGuard.Entity.ServerEntity;
+import com.TomGuard.Entity.ServerPdf;
 import com.TomGuard.Service.ApplicationService;
+import com.lowagie.text.DocumentException;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,5 +54,26 @@ public class ApplicationController {
     public void deleteApp(@PathVariable("applicationName") String applicationName)
     {
         applicationService.deleteById(applicationName);
+    }
+
+    @GetMapping("/apppdf")
+    public void generatePdf(HttpServletResponse response) throws DocumentException, IOException {
+
+        response.setContentType("application/pdf");
+        DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD:HH:MM:SS");
+        String currentDateTime = dateFormat.format(new Date());
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=pdf_" + currentDateTime + ".pdf";
+        response.setHeader(headerKey, headerValue);
+
+        List<ApplicationEntity> applicationEntityList = applicationService.findAllApps();
+
+
+        Apppdf apppdf =new Apppdf();
+        apppdf.setapplist(applicationEntityList);
+        apppdf.generate(response);
+
+
+
     }
 }
