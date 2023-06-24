@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AlertRepository extends JpaRepository<AlertEntity,Long> {
-    boolean existsByCheckedMetricId(Long checkedMetricId);
+    boolean existsByCheckedMetricId(Long metricId);
 }
