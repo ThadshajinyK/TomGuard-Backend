@@ -59,6 +59,15 @@ public class ServerServiceImpl implements ServerService{
        // updateIdsAfterDeletion();
     }
 
+
+    @Override
+    public Long serverCount() {
+        // Assuming you have access to the data source or repository
+        Long count = serverRepo.count(); // Replace "serverRepository" with your actual repository or data access object
+
+        return count;
+    }
+
     /*public void updateIdsAfterDeletion(){
         List<ServerEntity> remainingEntities = serverRepo.findAll(Sort.by("id"));
         int newId = 1;

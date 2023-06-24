@@ -5,6 +5,10 @@ import com.TomGuard.Entity.ServerPdf;
 import com.TomGuard.Repository.ServerRepo;
 import com.TomGuard.Service.ServerService;
 import com.lowagie.text.DocumentException;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.PersistenceUnit;
+import jakarta.persistence.Query;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -73,5 +77,17 @@ public class ServerController {
 
 
 
+    }
+    @PersistenceUnit
+    private EntityManagerFactory emf;
+    @GetMapping("/servercount")
+    public long getServerCount() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            Query query = em.createQuery("SELECT COUNT(s) FROM ServerEntity s");
+            return (long) query.getSingleResult();
+        } finally {
+            em.close();
+        }
     }
 }

@@ -7,19 +7,20 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.awt.*;
 import java.io.IOException;
 import java.util.List;
 
-public class ServerPdf {
+public class Clientpdf {
 
-    // List to hold all Server
-    private List<ServerEntity> serverEntityList;
+    // List to hold all client
+    private List<ClientEntity> clientEntityList;
 
     public void generate(HttpServletResponse response) throws DocumentException, IOException {
 
         // Creating the Object of Document
-        Document document = new Document(PageSize.A4);
+        Document document = new Document(PageSize.A4.rotate());
 
         // Getting instance of PdfWriter
         PdfWriter.getInstance(document, response.getOutputStream());
@@ -33,7 +34,7 @@ public class ServerPdf {
         fontTitle.setSize(20);
 
         // Creating paragraph
-        Paragraph paragraph = new Paragraph("List Of Servers", fontTitle);
+        Paragraph paragraph = new Paragraph("Clients Details", fontTitle);
 
         // Aligning the paragraph in document
         paragraph.setAlignment(Paragraph.ALIGN_CENTER);
@@ -42,20 +43,20 @@ public class ServerPdf {
         document.add(paragraph);
 
         // Creating a table of 10 columns
-        PdfPTable table = new PdfPTable(8);
+        PdfPTable table = new PdfPTable(11);
 
 
 
         // Setting width of table, its columns and spacing
         table.setWidthPercentage(100f);
-        table.setWidths(new int[] {2,2,2,2,2,2,2,2});
+        table.setWidths(new int[] {1,1,1,1,1,1,1,1,1,1,1});
         table.setSpacingBefore(5);
 
         // Create Table Cells for table header
         PdfPCell cell = new PdfPCell();
 
         // Setting the background color and padding
-        cell.setBackgroundColor(new Color(105, 46, 73));;
+        cell.setBackgroundColor(new Color(82, 107, 161));
         cell.setPadding(5);
 
         // Creating font
@@ -67,34 +68,43 @@ public class ServerPdf {
         // Adding Cell to table
 
 
-        cell.setPhrase(new Phrase("Hostname", font));
+        cell.setPhrase(new Phrase("Client ID", font));
         table.addCell(cell);
-        cell.setPhrase(new Phrase("Ip Address", font));
+        cell.setPhrase(new Phrase("Company Name", font));
         table.addCell(cell);
-        cell.setPhrase(new Phrase("UpTime", font));
+        cell.setPhrase(new Phrase("Contact Person", font));
         table.addCell(cell);
-        cell.setPhrase(new Phrase("Availability", font));
+        cell.setPhrase(new Phrase("Email", font));
         table.addCell(cell);
-        cell.setPhrase(new Phrase("Os", font));
+        cell.setPhrase(new Phrase("Telephone No", font));
         table.addCell(cell);
-        cell.setPhrase(new Phrase("Os Version", font));
+        cell.setPhrase(new Phrase("Business Type", font));
         table.addCell(cell);
-        cell.setPhrase(new Phrase("Os Architecture", font));
+        cell.setPhrase(new Phrase("Project Type", font));
         table.addCell(cell);
-        cell.setPhrase(new Phrase("Jvm Version", font));
+        cell.setPhrase(new Phrase("Project Name", font));
+        table.addCell(cell);
+        cell.setPhrase(new Phrase("Scope", font));
+        table.addCell(cell);
+        cell.setPhrase(new Phrase("Target Audience", font));
+        table.addCell(cell);
+        cell.setPhrase(new Phrase("Expected features", font));
         table.addCell(cell);
 
-        // Iterating over the list of servers
-        for (ServerEntity serverEntity : serverEntityList) {
+        // Iterating over the list of clients
+        for (ClientEntity clientEntity : clientEntityList) {
 
-            table.addCell(serverEntity.getHostName());
-            table.addCell(serverEntity.getIpAddress());
-            table.addCell(String.valueOf(serverEntity.getUptime()));
-            table.addCell(serverEntity.getAvailability());
-            table.addCell(serverEntity.getOsName());
-            table.addCell(serverEntity.getOsVersion());
-            table.addCell(serverEntity.getOsArchitecture());
-            table.addCell(serverEntity.getJvmVersion());
+            table.addCell(String.valueOf(clientEntity.getId()));
+            table.addCell(clientEntity.getCompanyName());
+            table.addCell(clientEntity.getContactPerson());
+            table.addCell(clientEntity.getEmailAddress());
+            table.addCell(clientEntity.getPhoneNumber());
+            table.addCell(clientEntity.getBusinessType());
+            table.addCell(clientEntity.getProjectType());
+            table.addCell(clientEntity.getProjectName());
+            table.addCell(clientEntity.getProjectScope());
+            table.addCell(clientEntity.getTargetAudience());
+            table.addCell(clientEntity.getExpectedFeatures());
 
 
         }
@@ -105,7 +115,9 @@ public class ServerPdf {
         document.close();
 
     }
-    public void setserverlist(List<ServerEntity> serverEntityList) {
-        this.serverEntityList = serverEntityList;
+
+
+    public void setclientlist(List<ClientEntity>clientEntityList){
+        this.clientEntityList=clientEntityList;
     }
 }
