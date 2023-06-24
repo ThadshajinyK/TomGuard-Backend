@@ -51,4 +51,9 @@ public class LogsServiceImpl implements LogsService {
     public void deleteLog(String timestamp) {
         logsRepo.deleteById(timestamp);
     }
+
+    @Override
+    public void deleteAllMetrics() {
+        logsRepo.deleteAll();
+    }
 }

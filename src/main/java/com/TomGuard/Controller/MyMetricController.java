@@ -44,6 +44,14 @@ public class MyMetricController{
     public void deleteMetrics(@PathVariable("id") Long id){
         myMetricsService.deleteMetrics(id);
     }
+
+    @DeleteMapping("/dltAll")
+    public void deleteMetricsAll()
+    {
+        myMetricsService.deleteAllMetrics();
+    }
 }
+
+
 
 
