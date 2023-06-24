@@ -35,7 +35,7 @@ public class AlertController {
     }
 
 
-    @PostConstruct
+   @PostConstruct
     public void init() {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
