@@ -17,4 +17,5 @@ public class AlertEntity {
     private String description;
     private LocalDateTime timeOfOccurance;
     private long checkedMetricId;
+
 }
