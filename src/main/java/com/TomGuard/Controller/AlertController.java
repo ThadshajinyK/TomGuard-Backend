@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
-
 @RestController
 @RequestMapping("/api/v1/")
 public class AlertController {
@@ -39,7 +38,6 @@ public class AlertController {
         alertServices.deleteAll();
     }
 
-
     @PostConstruct
     public void init() {
         Timer timer = new Timer();
@@ -53,4 +51,6 @@ public class AlertController {
 
     }
 }
+
+
 
