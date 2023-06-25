@@ -43,4 +43,9 @@ public class MyMetricsImpl implements MyMetricsService {
     public void deleteMetrics(Long id) {
         myMetricsRepo.deleteById(id);
     }
+
+    @Override
+    public void deleteAllMetrics() {
+        myMetricsRepo.deleteAll();
+    }
 }

@@ -42,6 +42,12 @@ public class LogsController {
     public void deleteLogs(@PathVariable("timestamp") String timestamp){
         logsService.deleteLog(timestamp);
     }
+
+    @DeleteMapping("/dltAll")
+    public void deleteMetricsAll()
+    {
+        logsService.deleteAllMetrics();
+    }
 }
 
 //cdwn

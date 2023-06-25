@@ -15,4 +15,5 @@ public interface LogsService {
     LogsEntity updateLog(LogsEntity logsEntity);
     void deleteLog(String timestamp);
 
+    void deleteAllMetrics();
 }

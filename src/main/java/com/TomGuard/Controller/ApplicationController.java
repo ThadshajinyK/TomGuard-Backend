@@ -2,8 +2,6 @@ package com.TomGuard.Controller;
 
 import com.TomGuard.Entity.ApplicationEntity;
 import com.TomGuard.Entity.Apppdf;
-import com.TomGuard.Entity.ServerEntity;
-import com.TomGuard.Entity.ServerPdf;
 import com.TomGuard.Service.ApplicationService;
 import com.lowagie.text.DocumentException;
 import jakarta.persistence.EntityManager;

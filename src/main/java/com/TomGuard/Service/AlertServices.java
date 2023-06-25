@@ -21,4 +21,6 @@ public interface AlertServices {
     List<Alert> getAllAlerts();
 
     boolean deleteAlert(Long id);
+
+    void deleteAll();
 }

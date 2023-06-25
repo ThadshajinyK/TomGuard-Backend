@@ -19,23 +19,28 @@ public class AlertController {
 
     //Get all alerts from database
     @GetMapping("/alerts")
-    public List<Alert> getAllAlerts(){
+    public List<Alert> getAllAlerts() {
         return alertServices.getAllAlerts();
     }
 
 
     //Delete alert by id
     @DeleteMapping("/alerts/{id}")
-    public ResponseEntity<Map<String,Boolean>> deleteAlert(@PathVariable Long id){
+    public ResponseEntity<Map<String, Boolean>> deleteAlert(@PathVariable Long id) {
         boolean deleted = false;
         deleted = alertServices.deleteAlert(id);
-        Map<String,Boolean> response = new HashMap<>();
-        response.put("deleted",deleted);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", deleted);
         return ResponseEntity.ok(response);
     }
 
+    @DeleteMapping("/alerts/deleteAll")
+    public void deleteAllAlerts() {
+        alertServices.deleteAll();
+    }
 
-   @PostConstruct
+
+    @PostConstruct
     public void init() {
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -43,9 +48,9 @@ public class AlertController {
             public void run() {
                 alertServices.allAlerts();
             }
+
         }, 0, 10000); // 10000 milliseconds = 10 seconds
+
     }
 }
-
-
 
