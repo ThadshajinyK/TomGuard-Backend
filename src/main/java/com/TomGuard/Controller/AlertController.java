@@ -43,7 +43,7 @@ public class AlertController {
             public void run() {
                 alertServices.allAlerts();
             }
-        }, 0, 7000); // 7000 milliseconds = 7 seconds
+        }, 0, 10000); // 10000 milliseconds = 10 seconds
     }
 }
 
