@@ -13,4 +13,5 @@ public interface MyMetricsService {
     MyMetrics saveMetrics(MyMetrics myMetrics);
     MyMetrics updateMetrics(MyMetrics myMetrics);
     void deleteMetrics(Long id);
+    void deleteAllMetrics();
 }

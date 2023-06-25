@@ -34,6 +34,11 @@ public class AlertController {
         return ResponseEntity.ok(response);
     }
 
+    @DeleteMapping("/alerts/deleteAll")
+    public void deleteAllAlerts(){
+        alertServices.deleteAll();
+    }
+
 
    @PostConstruct
     public void init() {
@@ -43,9 +48,7 @@ public class AlertController {
             public void run() {
                 alertServices.allAlerts();
             }
-        }, 0, 7000); // 7000 milliseconds = 7 seconds
+        }, 0, 10000); // 7000 milliseconds = 7 seconds
     }
 }
-
-
 

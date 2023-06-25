@@ -141,7 +141,12 @@ public class AlertServicesImpl implements AlertServices {
             alertRepository.delete(alert);
             return true;
         }
+
+    @Override
+    public void deleteAll() {
+        alertRepository.deleteAll();
     }
+}
 
 
 
