@@ -29,7 +29,7 @@ public class AlertServicesImpl implements AlertServices {
             boolean alertExists = alertRepository.existsByCheckedMetricId(myMetrics.getId());
             if (!alertExists) {
                 double responseTimeValue = myMetrics.getResponseTimeInMillis();
-                if (responseTimeValue >= 1002) {
+                if (responseTimeValue >= 300) {
                     AlertEntity alert = new AlertEntity();
                     alert.setAlertType("Very high response time found");
                     alert.setSeverityLevel("High");
@@ -37,7 +37,7 @@ public class AlertServicesImpl implements AlertServices {
                     alert.setTimeOfOccurance(LocalDateTime.now());
                     alert.setCheckedMetricId(myMetrics.getId());
                     alertRepository.save(alert);
-                } else if (responseTimeValue >= 500) {
+                } else if (responseTimeValue >= 10) {
                     AlertEntity alert = new AlertEntity();
                     alert.setAlertType("High response time found");
                     alert.setSeverityLevel("Medium");
@@ -45,9 +45,9 @@ public class AlertServicesImpl implements AlertServices {
                     alert.setTimeOfOccurance(LocalDateTime.now());
                     alert.setCheckedMetricId(myMetrics.getId());
                     alertRepository.save(alert);
-                } else if (responseTimeValue >= 200) {
+                } else if (responseTimeValue >= 5) {
                     AlertEntity alert = new AlertEntity();
-                    alert.setAlertType("Significant amount of response time found");
+                    alert.setAlertType("Response time can be improved");
                     alert.setSeverityLevel("Low");
                     alert.setDescription("Response time is " + responseTimeValue + "ms");
                     alert.setTimeOfOccurance(LocalDateTime.now());
@@ -56,7 +56,7 @@ public class AlertServicesImpl implements AlertServices {
                 }
 
                 double requestTimeValue = myMetrics.getRequestTimeInMillis();
-                if (requestTimeValue >= 1000) {
+                if (requestTimeValue >= 3000000) {
                     AlertEntity alert = new AlertEntity();
                     alert.setAlertType("Very high request time found");
                     alert.setSeverityLevel("High");
@@ -64,7 +64,7 @@ public class AlertServicesImpl implements AlertServices {
                     alert.setTimeOfOccurance(LocalDateTime.now());
                     alert.setCheckedMetricId(myMetrics.getId());
                     alertRepository.save(alert);
-                } else if (requestTimeValue >= 500) {
+                } else if (requestTimeValue >= 2000000) {
                     AlertEntity alert = new AlertEntity();
                     alert.setAlertType("High request time found");
                     alert.setSeverityLevel("Medium");
@@ -72,9 +72,9 @@ public class AlertServicesImpl implements AlertServices {
                     alert.setTimeOfOccurance(LocalDateTime.now());
                     alert.setCheckedMetricId(myMetrics.getId());
                     alertRepository.save(alert);
-                } else if (requestTimeValue >= 200) {
+                } else if (requestTimeValue >= 1500000) {
                     AlertEntity alert = new AlertEntity();
-                    alert.setAlertType("Significant amount of request time found");
+                    alert.setAlertType("Response time can be improved");
                     alert.setSeverityLevel("Low");
                     alert.setDescription("Request time is " + requestTimeValue + "ms");
                     alert.setTimeOfOccurance(LocalDateTime.now());
@@ -83,7 +83,7 @@ public class AlertServicesImpl implements AlertServices {
                 }
 
                 double upTimeValue = myMetrics.getUptimeInMillis();
-                if (upTimeValue >= 300000 && upTimeValue < 1800000) {
+                if (upTimeValue >= 1500000 && upTimeValue < 2000000) {
                     AlertEntity alert = new AlertEntity();
                     alert.setAlertType("Very low uptime found");
                     alert.setSeverityLevel("High");
@@ -91,17 +91,17 @@ public class AlertServicesImpl implements AlertServices {
                     alert.setTimeOfOccurance(LocalDateTime.now());
                     alert.setCheckedMetricId(myMetrics.getId());
                     alertRepository.save(alert);
-                } else if (upTimeValue >= 1800000 && upTimeValue < 3600000) {
+                } else if (upTimeValue >= 2000000 && upTimeValue < 3000000) {
                     AlertEntity alert = new AlertEntity();
-                    alert.setAlertType("Middle uptime found");
+                    alert.setAlertType("Low uptime found");
                     alert.setSeverityLevel("Medium");
                     alert.setDescription("Uptime is " + upTimeValue + "ms");
                     alert.setTimeOfOccurance(LocalDateTime.now());
                     alert.setCheckedMetricId(myMetrics.getId());
                     alertRepository.save(alert);
-                } else if (upTimeValue >= 3600000) {
+                } else if (upTimeValue >= 3000000) {
                     AlertEntity alert = new AlertEntity();
-                    alert.setAlertType("Good uptime found");
+                    alert.setAlertType("Uptime can be improved");
                     alert.setSeverityLevel("Low");
                     alert.setDescription("Uptime is " + upTimeValue + "ms");
                     alert.setTimeOfOccurance(LocalDateTime.now());
@@ -114,7 +114,7 @@ public class AlertServicesImpl implements AlertServices {
                     AlertEntity alert = new AlertEntity();
                     alert.setAlertType("Server is offline");
                     alert.setSeverityLevel("High");
-                    alert.setDescription("Availability is " + availabilityValue);
+                    alert.setDescription("Availability: " + availabilityValue);
                     alert.setTimeOfOccurance(LocalDateTime.now());
                     alert.setCheckedMetricId(myMetrics.getId());
                     alertRepository.save(alert);
@@ -122,31 +122,31 @@ public class AlertServicesImpl implements AlertServices {
             }
         }
     }
-
-
-
-
-
+    @Override
+    public List<Alert> getAllAlerts () {
+        List<AlertEntity> alertEntities = alertRepository.findAll();
+        List<Alert> alerts = alertEntities.stream().map(emp -> new Alert(emp.getId(), emp.getAlertType(), emp.getSeverityLevel(), emp.getDescription(), emp.getTimeOfOccurance())).collect(Collectors.toList());
+        return alerts;
+    }
 
     @Override
-        public List<Alert> getAllAlerts () {
-            List<AlertEntity> alertEntities = alertRepository.findAll();
-            List<Alert> alerts = alertEntities.stream().map(emp -> new Alert(emp.getId(), emp.getAlertType(), emp.getSeverityLevel(), emp.getDescription(), emp.getTimeOfOccurance())).collect(Collectors.toList());
-            return alerts;
-        }
-
-        @Override
-        public boolean deleteAlert (Long id){
-            AlertEntity alert = alertRepository.findById(id).get();
-            alertRepository.delete(alert);
-            return true;
-        }
+    public boolean deleteAlert (Long id){
+        AlertEntity alert = alertRepository.findById(id).get();
+        alertRepository.delete(alert);
+        return true;
+    }
 
     @Override
     public void deleteAll() {
         alertRepository.deleteAll();
     }
 }
+
+
+
+
+
+
 
 
 
