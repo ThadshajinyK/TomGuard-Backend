@@ -11,6 +11,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/logs")
 public class LogsController {
+
     @Autowired
     private final LogsService logsService;
 
