@@ -12,7 +12,7 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/metrics")
+@RequestMapping("/api/metrics")
 public class MyMetricController{
     @Autowired
     private final MyMetricsService myMetricsService;
