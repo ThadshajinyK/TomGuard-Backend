@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/apps")
+@RequestMapping("/api/apps")
 public class ApplicationController {
     @Autowired
     private final ApplicationService applicationService;

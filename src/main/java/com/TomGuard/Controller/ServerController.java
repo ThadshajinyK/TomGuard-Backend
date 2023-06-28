@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/server")
+@RequestMapping("/api/server")
 public class ServerController {
     @Autowired
     private final ServerService serverService;
