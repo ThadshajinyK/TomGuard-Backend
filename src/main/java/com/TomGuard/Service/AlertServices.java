@@ -14,4 +14,5 @@ public interface AlertServices {
     boolean deleteAlert(Long id);
 
     void deleteAll();
+
 }
