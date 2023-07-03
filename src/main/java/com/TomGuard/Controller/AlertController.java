@@ -47,8 +47,7 @@ public class AlertController {
                 alertServices.allAlerts();
             }
 
-        }, 0, 10000); // 10000 milliseconds = 10 seconds
-
+        }, 0, 15000); // 15000 milliseconds = 15 seconds
     }
 }
 
