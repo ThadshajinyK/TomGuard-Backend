@@ -34,7 +34,7 @@ public class AlertServicesImpl implements AlertServices {
             boolean alertExists = preventDuplicateAlertsRepository.existsByCheckedMetricId(myMetrics.getId());
             if (!alertExists) {
                 double responseTimeValue = myMetrics.getResponseTimeInMillis();
-                if (responseTimeValue >= 300) {
+                if (responseTimeValue >= 20) {
                     AlertEntity alert = new AlertEntity();
                     PreventDuplicateAlerts preventDuplicateAlerts = new PreventDuplicateAlerts();
                     alert.setAlertType("Very high response time found");
@@ -44,7 +44,7 @@ public class AlertServicesImpl implements AlertServices {
                     preventDuplicateAlerts.setCheckedMetricId(myMetrics.getId());
                     preventDuplicateAlertsRepository.save(preventDuplicateAlerts);
                     alertRepository.save(alert);
-                } else if (responseTimeValue >= 10) {
+                } else if (responseTimeValue >= 15) {
                     AlertEntity alert = new AlertEntity();
                     PreventDuplicateAlerts preventDuplicateAlerts = new PreventDuplicateAlerts();
                     alert.setAlertType("High response time found");
@@ -54,7 +54,7 @@ public class AlertServicesImpl implements AlertServices {
                     preventDuplicateAlerts.setCheckedMetricId(myMetrics.getId());
                     preventDuplicateAlertsRepository.save(preventDuplicateAlerts);
                     alertRepository.save(alert);
-                } else if (responseTimeValue >= 5) {
+                } else if (responseTimeValue >= 10) {
                     AlertEntity alert = new AlertEntity();
                     PreventDuplicateAlerts preventDuplicateAlerts = new PreventDuplicateAlerts();
                     alert.setAlertType("Response time can be improved");
@@ -66,8 +66,74 @@ public class AlertServicesImpl implements AlertServices {
                     alertRepository.save(alert);
                 }
 
+                double memoryUsageValue = myMetrics.getMemoryUsage();
+                if (memoryUsageValue >= 100) {
+                    AlertEntity alert = new AlertEntity();
+                    PreventDuplicateAlerts preventDuplicateAlerts = new PreventDuplicateAlerts();
+                    alert.setAlertType("Very high memory usage found");
+                    alert.setSeverityLevel("High");
+                    alert.setDescription("Memory usage is " + memoryUsageValue);
+                    alert.setTimeOfOccurance(LocalDateTime.now());
+                    preventDuplicateAlerts.setCheckedMetricId(myMetrics.getId());
+                    preventDuplicateAlertsRepository.save(preventDuplicateAlerts);
+                    alertRepository.save(alert);
+                } else if (memoryUsageValue >= 90) {
+                    AlertEntity alert = new AlertEntity();
+                    PreventDuplicateAlerts preventDuplicateAlerts = new PreventDuplicateAlerts();
+                    alert.setAlertType("High memory usage found");
+                    alert.setSeverityLevel("Medium");
+                    alert.setDescription("Memory usage is " + memoryUsageValue);
+                    alert.setTimeOfOccurance(LocalDateTime.now());
+                    preventDuplicateAlerts.setCheckedMetricId(myMetrics.getId());
+                    preventDuplicateAlertsRepository.save(preventDuplicateAlerts);
+                    alertRepository.save(alert);
+                } else if (memoryUsageValue >= 80) {
+                    AlertEntity alert = new AlertEntity();
+                    PreventDuplicateAlerts preventDuplicateAlerts = new PreventDuplicateAlerts();
+                    alert.setAlertType("Memory usage can be improved");
+                    alert.setSeverityLevel("Low");
+                    alert.setDescription("Memory usage is " + memoryUsageValue);
+                    alert.setTimeOfOccurance(LocalDateTime.now());
+                    preventDuplicateAlerts.setCheckedMetricId(myMetrics.getId());
+                    preventDuplicateAlertsRepository.save(preventDuplicateAlerts);
+                    alertRepository.save(alert);
+                }
+
+                double threadCount = myMetrics.getThreadCount();
+                if (threadCount >= 100) {
+                    AlertEntity alert = new AlertEntity();
+                    PreventDuplicateAlerts preventDuplicateAlerts = new PreventDuplicateAlerts();
+                    alert.setAlertType("Very high thread count found");
+                    alert.setSeverityLevel("High");
+                    alert.setDescription("Thread count is "+threadCount);
+                    alert.setTimeOfOccurance(LocalDateTime.now());
+                    preventDuplicateAlerts.setCheckedMetricId(myMetrics.getId());
+                    preventDuplicateAlertsRepository.save(preventDuplicateAlerts);
+                    alertRepository.save(alert);
+                } else if (threadCount >= 80) {
+                    AlertEntity alert = new AlertEntity();
+                    PreventDuplicateAlerts preventDuplicateAlerts = new PreventDuplicateAlerts();
+                    alert.setAlertType("High thread count found");
+                    alert.setSeverityLevel("Medium");
+                    alert.setDescription("Thread count is " + threadCount);
+                    alert.setTimeOfOccurance(LocalDateTime.now());
+                    preventDuplicateAlerts.setCheckedMetricId(myMetrics.getId());
+                    preventDuplicateAlertsRepository.save(preventDuplicateAlerts);
+                    alertRepository.save(alert);
+                } else if (threadCount >= 60) {
+                    AlertEntity alert = new AlertEntity();
+                    PreventDuplicateAlerts preventDuplicateAlerts = new PreventDuplicateAlerts();
+                    alert.setAlertType("Thread count can be improved");
+                    alert.setSeverityLevel("Low");
+                    alert.setDescription("Thread count is " + threadCount);
+                    alert.setTimeOfOccurance(LocalDateTime.now());
+                    preventDuplicateAlerts.setCheckedMetricId(myMetrics.getId());
+                    preventDuplicateAlertsRepository.save(preventDuplicateAlerts);
+                    alertRepository.save(alert);
+                }
+
                 double requestTimeValue = myMetrics.getRequestTimeInMillis();
-                if (requestTimeValue >= 3000000) {
+                if (requestTimeValue >= 30000) {
                     AlertEntity alert = new AlertEntity();
                     PreventDuplicateAlerts preventDuplicateAlerts = new PreventDuplicateAlerts();
                     alert.setAlertType("Very high request time found");
@@ -77,7 +143,7 @@ public class AlertServicesImpl implements AlertServices {
                     preventDuplicateAlerts.setCheckedMetricId(myMetrics.getId());
                     preventDuplicateAlertsRepository.save(preventDuplicateAlerts);
                     alertRepository.save(alert);
-                } else if (requestTimeValue >= 2000000) {
+                } else if (requestTimeValue >= 20000) {
                     AlertEntity alert = new AlertEntity();
                     PreventDuplicateAlerts preventDuplicateAlerts = new PreventDuplicateAlerts();
                     alert.setAlertType("High request time found");
@@ -87,7 +153,7 @@ public class AlertServicesImpl implements AlertServices {
                     preventDuplicateAlerts.setCheckedMetricId(myMetrics.getId());
                     preventDuplicateAlertsRepository.save(preventDuplicateAlerts);
                     alertRepository.save(alert);
-                } else if (requestTimeValue >= 1500000) {
+                } else if (requestTimeValue >= 15000) {
                     AlertEntity alert = new AlertEntity();
                     PreventDuplicateAlerts preventDuplicateAlerts = new PreventDuplicateAlerts();
                     alert.setAlertType("Response time can be improved");
@@ -100,7 +166,7 @@ public class AlertServicesImpl implements AlertServices {
                 }
 
                 double upTimeValue = myMetrics.getUptimeInMillis();
-                if (upTimeValue >= 1500000 && upTimeValue < 2000000) {
+                if (upTimeValue >= 15000 && upTimeValue < 20000) {
                     AlertEntity alert = new AlertEntity();
                     PreventDuplicateAlerts preventDuplicateAlerts = new PreventDuplicateAlerts();
                     alert.setAlertType("Very low uptime found");
@@ -110,7 +176,7 @@ public class AlertServicesImpl implements AlertServices {
                     preventDuplicateAlerts.setCheckedMetricId(myMetrics.getId());
                     preventDuplicateAlertsRepository.save(preventDuplicateAlerts);
                     alertRepository.save(alert);
-                } else if (upTimeValue >= 2000000 && upTimeValue < 3000000) {
+                } else if (upTimeValue >= 20000 && upTimeValue < 30000) {
                     AlertEntity alert = new AlertEntity();
                     PreventDuplicateAlerts preventDuplicateAlerts = new PreventDuplicateAlerts();
                     alert.setAlertType("Low uptime found");
@@ -120,7 +186,7 @@ public class AlertServicesImpl implements AlertServices {
                     preventDuplicateAlerts.setCheckedMetricId(myMetrics.getId());
                     preventDuplicateAlertsRepository.save(preventDuplicateAlerts);
                     alertRepository.save(alert);
-                } else if (upTimeValue >= 3000000) {
+                } else if (upTimeValue >= 30000) {
                     AlertEntity alert = new AlertEntity();
                     PreventDuplicateAlerts preventDuplicateAlerts = new PreventDuplicateAlerts();
                     alert.setAlertType("Uptime can be improved");
