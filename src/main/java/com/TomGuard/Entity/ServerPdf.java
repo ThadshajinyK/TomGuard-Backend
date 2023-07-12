@@ -140,7 +140,7 @@ public class ServerPdf {
         String deviceLocation = getDeviceLocation();
         String osName = System.getProperty("os.name");
         String ipAddress = InetAddress.getLocalHost().getHostAddress();
-        String deviceInfo = "Generated on: " + getCurrentDateTime() + " | Device: " + deviceName +" | OS: "+ osName +" | IP ADDRESS: "+ipAddress+ " (" + deviceLocation + ")";
+        String deviceInfo = "Generated on: " + getCurrentDateTime() + " | Device: " + deviceName +" | OS: "+ osName +" | IP ADDRESS: "+ipAddress;
         Paragraph deviceNameParagraph = new Paragraph(deviceInfo, deviceNameFont);
         deviceNameParagraph.setAlignment(Paragraph.ALIGN_RIGHT);
         document.add(deviceNameParagraph);
