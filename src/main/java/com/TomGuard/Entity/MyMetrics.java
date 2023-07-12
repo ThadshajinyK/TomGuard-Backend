@@ -26,16 +26,29 @@ public class MyMetrics {
     @Column(nullable = true)
     private Long requestTimeInMillis;
 
+    @Column(nullable = true)
+    private Double memoryUsage;
+
+    @Column(nullable = true)
+    private String noOfSession;
+
+    @Column(nullable = true)
+    private int threadCount;
+
+
     public MyMetrics() {
         this.timestamp = new Timestamp(System.currentTimeMillis());
     }
 
-    public MyMetrics(Long id, String availability, Long uptimeInMillis, Long responseTimeInMillis, Long requestTimeInMillis) {
+    public MyMetrics(Long id, Timestamp timestamp, int threadCount,String availability, Long uptimeInMillis, Long responseTimeInMillis, Long requestTimeInMillis, Double memoryUsage, String noOfSession) {
         this.id = id;
         this.availability = availability;
         this.uptimeInMillis = uptimeInMillis;
         this.responseTimeInMillis = responseTimeInMillis;
         this.requestTimeInMillis = requestTimeInMillis;
+        this.memoryUsage = memoryUsage;
+        this.noOfSession = noOfSession;
+        this.threadCount=threadCount;
     }
 
     public Timestamp getTimestamp() {
@@ -84,5 +97,28 @@ public class MyMetrics {
 
     public void setRequestTimeInMillis(Long requestTimeInMillis) {
         this.requestTimeInMillis = requestTimeInMillis;
+    }
+
+    public Double getMemoryUsage() {
+        return memoryUsage;
+    }
+
+    public void setMemoryUsage(Double memoryUsage) {
+        this.memoryUsage = memoryUsage;
+    }
+
+    public String getNoOfSession() {
+        return noOfSession;
+    }
+
+    public void setNoOfSession(String noOfSession) {
+        this.noOfSession = noOfSession;
+    }
+
+    public int getThreadCount() {
+        return threadCount;
+    }
+    public void setThreadCount(int threadCount) {
+        this.threadCount = threadCount;
     }
 }
