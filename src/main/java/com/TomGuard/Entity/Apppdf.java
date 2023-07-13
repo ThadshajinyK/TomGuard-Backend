@@ -59,13 +59,13 @@ public class Apppdf {
         document.add(paragraph);
 
         // Creating a table of 10 columns
-        PdfPTable table = new PdfPTable(5);
+        PdfPTable table = new PdfPTable(3);
 
 
 
         // Setting width of table, its columns and spacing
         table.setWidthPercentage(100f);
-        table.setWidths(new int[] {1,1,1,1,1});
+        table.setWidths(new int[] {1,1,1});
         table.setSpacingBefore(5);
 
         // Create Table Cells for table header
@@ -90,10 +90,10 @@ public class Apppdf {
         table.addCell(cell);
         cell.setPhrase(new Phrase("Path", font));
         table.addCell(cell);
-        cell.setPhrase(new Phrase("App Type", font));
-        table.addCell(cell);
-        cell.setPhrase(new Phrase("Client Name", font));
-        table.addCell(cell);
+//        cell.setPhrase(new Phrase("App Type", font));
+//        table.addCell(cell);
+//        cell.setPhrase(new Phrase("Client Name", font));
+//        table.addCell(cell);
 
 
         // Iterating over the list of clients
@@ -103,8 +103,8 @@ public class Apppdf {
             table.addCell(applicationEntity.getApplicationName());
             table.addCell(applicationEntity.getState());
             table.addCell(applicationEntity.getPath());
-            table.addCell(applicationEntity.getAppType());
-            table.addCell(applicationEntity.getClientName());
+//            table.addCell(applicationEntity.getAppType());
+//            table.addCell(applicationEntity.getClientName());
 
 
         }

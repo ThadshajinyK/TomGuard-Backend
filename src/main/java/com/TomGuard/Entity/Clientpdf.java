@@ -60,13 +60,13 @@ public class Clientpdf {
         document.add(paragraph);
 
         // Creating a table of 10 columns
-        PdfPTable table = new PdfPTable(11);
+        PdfPTable table = new PdfPTable(10);
 
 
 
         // Setting width of table, its columns and spacing
         table.setWidthPercentage(100f);
-        table.setWidths(new int[] {1,1,1,1,1,1,1,1,1,1,1});
+        table.setWidths(new int[] {1,1,1,1,1,1,1,1,1,1});
         table.setSpacingBefore(5);
 
         // Create Table Cells for table header
@@ -85,8 +85,8 @@ public class Clientpdf {
         // Adding Cell to table
 
 
-        cell.setPhrase(new Phrase("Client ID", font));
-        table.addCell(cell);
+//        cell.setPhrase(new Phrase("Client ID", font));
+//        table.addCell(cell);
         cell.setPhrase(new Phrase("Company Name", font));
         table.addCell(cell);
         cell.setPhrase(new Phrase("Contact Person", font));
@@ -111,7 +111,7 @@ public class Clientpdf {
         // Iterating over the list of clients
         for (ClientEntity clientEntity : clientEntityList) {
 
-            table.addCell(String.valueOf(clientEntity.getId()));
+//            table.addCell(String.valueOf(clientEntity.getId()));
             table.addCell(clientEntity.getCompanyName());
             table.addCell(clientEntity.getContactPerson());
             table.addCell(clientEntity.getEmailAddress());
